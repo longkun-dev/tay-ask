@@ -1,0 +1,21 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: ask-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/iced-cola/spring-cloud-config-center/
+          username:
+          password:
+          default-label: master
+          search-paths:
+          skipSslValidation: true
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:9000/eureka/

@@ -1,0 +1,42 @@
+问题记录：
+
+
+> 依赖无法导入，爆红
+> <scope>runtime</scope> -> <scope>import</scope>就好了，原因还未知，在这篇文章看到的：
+> https://blog.csdn.net/qq_37170583/article/details/80704904
+> springcloud项目搭建（Finchley.RELEASE版）
+> 类似
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${springcloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+</dependencies>
+
+
+
+> 配置文件不生效，yml文件里配置了server.port，启动端口还是默认8080，eureka-server启动失败
+> 和<packaging>pom</packaging>有关，parent项目的打包方式改为pom，子模块的打包方式改为jar，
+> 重新刷新依赖，重启。
+
+
+
+> config-server 和 config-client的配置
+> client中关于spring.cloud.config的配置要配置在bootstrap.yml中
+> client中的service-id为config-server的spring.application.name
+
+
+
+> Maven编译打包报错：Non-resolvable parent POM for...
+原因：
+    子项目对应的parent： 里面加了标签 <relativePath/>
+参详原因是因为加了这个标签后，子类会去对应的路径下找父项目（找不到）
+把这个标签去掉就好了
+
+
+> 怎么运行generatorConfig.xml文件？
+> 先选中模块pom.xml，然后maven > generate sources and updated
+> 到侧边栏Maven > module > Plugins > 下拉插件 > 运行

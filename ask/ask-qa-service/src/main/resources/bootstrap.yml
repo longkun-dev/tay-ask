@@ -1,0 +1,20 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: ask-qa-service
+  cloud:
+    config:
+      profile: dev
+      label: master
+      discovery:
+        enabled: true
+        # config-server 的 spring.application.name
+        service-id: ask-config-server
+      name: ask-qa-service-config-client
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9000/eureka/

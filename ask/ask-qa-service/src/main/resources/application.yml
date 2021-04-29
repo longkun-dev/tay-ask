@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 12345678
+    url: jdbc:mysql://127.0.0.1:3306/ask?serverTimezone=UTC
+    druid:
+      initial-size: 10
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      pool-prepared-statements: false
+      validation-query-timeout: 1
+      test-on-borrow: false
+      test-on-return: false
+      validation-query: select 'x'
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 180000
+      max-evictable-idle-time-millis: 300000
+      filter:
+        stat:
+          db-type: mysql
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 2000
+          merge-sql: true
+          connection-stack-trace-enable: true

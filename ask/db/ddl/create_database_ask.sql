@@ -1,0 +1,5 @@
+# 新建数据库
+
+DROP DATABASE IF EXISTS `ask`;
+
+CREATE DATABASE `ask`;
