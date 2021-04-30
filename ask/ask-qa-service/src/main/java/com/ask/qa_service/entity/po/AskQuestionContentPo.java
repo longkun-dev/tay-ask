@@ -1,20 +1,16 @@
-package com.ask.qa_service.po;
+package com.ask.qa_service.entity.po;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class AskAnswersCommentPo {
+public class AskQuestionContentPo {
     private String id;
 
-    private String answerNo;
+    private String questionNo;
 
-    private String commentNo;
-
-    private String orderNo;
-
-    private String commentContent;
+    private String questionContent;
 
     private String createdBy;
 

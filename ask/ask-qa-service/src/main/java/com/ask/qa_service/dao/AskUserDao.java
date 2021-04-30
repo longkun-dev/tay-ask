@@ -1,14 +1,13 @@
 package com.ask.qa_service.dao;
 
-import com.ask.qa_service.po.AskUserPo;
-import com.ask.qa_service.po.AskUserExample;
+import com.ask.qa_service.entity.po.AskUserPo;
+import com.ask.qa_service.entity.po.AskUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface AskUserDao {
-    long countByExample(AskUserExample example);
 
-    int deleteByExample(AskUserExample example);
+    AskUserPo queryByUserId(String userId);
 
     int deleteByPrimaryKey(String id);
 
@@ -16,13 +15,10 @@ public interface AskUserDao {
 
     int insertSelective(AskUserPo record);
 
-    List<AskUserPo> selectByExample(AskUserExample example);
 
     AskUserPo selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") AskUserPo record, @Param("example") AskUserExample example);
-
-    int updateByExample(@Param("record") AskUserPo record, @Param("example") AskUserExample example);
 
     int updateByPrimaryKeySelective(AskUserPo record);
 

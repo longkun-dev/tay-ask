@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ask.iml" filepath="$PROJECT_DIR$/.idea/ask.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ask/ask.iml" filepath="$PROJECT_DIR$/ask/ask.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ask/ask-config-server/ask-config-server.iml" filepath="$PROJECT_DIR$/ask/ask-config-server/ask-config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ask/ask-eureka-server/ask-eureka-server.iml" filepath="$PROJECT_DIR$/ask/ask-eureka-server/ask-eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ask/ask-qa-service/ask-qa-service.iml" filepath="$PROJECT_DIR$/ask/ask-qa-service/ask-qa-service.iml" />
     </modules>
   </component>
 </project>

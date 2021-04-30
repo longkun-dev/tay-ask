@@ -1,4 +1,4 @@
-package com.ask.qa_service.po;
+package com.ask.qa_service.entity.po;
 
 import lombok.Data;
 
@@ -11,6 +11,8 @@ public class AskQuestionPo {
     private String questionNo;
 
     private Date publishTime;
+
+    private String questionTitle;
 
     private String questionContent;
 

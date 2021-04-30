@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ask.qa_service.dao.AskAnswersCommentMapper">
-  <resultMap id="BaseResultMap" type="com.ask.qa_service.po.AskAnswersCommentPo">
+  <resultMap id="BaseResultMap" type="com.ask.qa_service.entity.po.AskAnswersCommentPo">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="answer_no" jdbcType="VARCHAR" property="answerNo" />
     <result column="comment_no" jdbcType="VARCHAR" property="commentNo" />
@@ -74,7 +74,7 @@
     id, answer_no, comment_no, order_no, comment_content, created_by, created_time, updated_by, 
     updated_time
   </sql>
-  <select id="selectByExample" parameterType="com.ask.qa_service.po.AskAnswersCommentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ask.qa_service.entity.po.AskAnswersCommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -98,13 +98,13 @@
     delete from ask_answers_comment
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ask.qa_service.po.AskAnswersCommentExample">
+  <delete id="deleteByExample" parameterType="com.ask.qa_service.entity.po.AskAnswersCommentExample">
     delete from ask_answers_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ask.qa_service.po.AskAnswersCommentPo">
+  <insert id="insert" parameterType="com.ask.qa_service.entity.po.AskAnswersCommentPo">
     insert into ask_answers_comment (id, answer_no, comment_no, 
       order_no, comment_content, created_by, 
       created_time, updated_by, updated_time
@@ -114,7 +114,7 @@
       #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ask.qa_service.po.AskAnswersCommentPo">
+  <insert id="insertSelective" parameterType="com.ask.qa_service.entity.po.AskAnswersCommentPo">
     insert into ask_answers_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -175,7 +175,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ask.qa_service.po.AskAnswersCommentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ask.qa_service.entity.po.AskAnswersCommentExample" resultType="java.lang.Long">
     select count(*) from ask_answers_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -231,7 +231,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ask.qa_service.po.AskAnswersCommentPo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ask.qa_service.entity.po.AskAnswersCommentPo">
     update ask_answers_comment
     <set>
       <if test="answerNo != null">
@@ -261,7 +261,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ask.qa_service.po.AskAnswersCommentPo">
+  <update id="updateByPrimaryKey" parameterType="com.ask.qa_service.entity.po.AskAnswersCommentPo">
     update ask_answers_comment
     set answer_no = #{answerNo,jdbcType=VARCHAR},
       comment_no = #{commentNo,jdbcType=VARCHAR},

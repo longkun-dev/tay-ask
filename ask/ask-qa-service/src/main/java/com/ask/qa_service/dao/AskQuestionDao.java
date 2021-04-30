@@ -1,7 +1,7 @@
 package com.ask.qa_service.dao;
 
-import com.ask.qa_service.po.AskQuestionPo;
-import com.ask.qa_service.po.AskQuestionExample;
+import com.ask.qa_service.entity.po.AskQuestionPo;
+import com.ask.qa_service.entity.po.AskQuestionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

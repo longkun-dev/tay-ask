@@ -1,7 +1,7 @@
 package com.ask.qa_service.dao;
 
-import com.ask.qa_service.po.AskUserExtPo;
-import com.ask.qa_service.po.AskUserExtExample;
+import com.ask.qa_service.entity.po.AskUserExtPo;
+import com.ask.qa_service.entity.po.AskUserExtExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

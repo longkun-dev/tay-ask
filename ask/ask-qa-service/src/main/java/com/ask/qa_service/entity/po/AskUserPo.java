@@ -1,4 +1,4 @@
-package com.ask.qa_service.po;
+package com.ask.qa_service.entity.po;
 
 import lombok.Data;
 
@@ -23,4 +23,6 @@ public class AskUserPo {
     private Date createdTime;
 
     private String updatedBy;
+
+    private String updatedTime;
 }

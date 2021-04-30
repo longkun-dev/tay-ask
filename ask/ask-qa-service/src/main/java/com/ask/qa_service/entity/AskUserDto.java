@@ -1,4 +1,4 @@
-package com.ask.qa_service.po;
+package com.ask.qa_service.entity;
 
 /**
  * @author zhulongkun20@163.com
