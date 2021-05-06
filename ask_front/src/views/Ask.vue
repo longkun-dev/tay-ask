@@ -2,6 +2,7 @@
     <div>
         <router-view></router-view>
         <div class="pane">
+            <nav-header></nav-header>
             <el-row>
                 <el-col :span="24">
                     <span class="question-title">Ask a public question</span>
@@ -10,7 +11,7 @@
             </el-row>
             <el-row>
                 <el-col :span="16">
-                    <el-form style="width: 80%" ref="form" :model="form" label-position="top" label-width="80px">
+                    <el-form style="width: 90%" ref="form" :model="form" label-position="top" label-width="80px">
                         <el-form-item label="Title">
                             <span>Be specific and imagine you’re asking a question to another person</span>
                             <el-input type="textarea" v-model="form.questionTitle" maxlength="120"
@@ -75,7 +76,10 @@
         </div>
     </div>
 </template>
+
 <script>
+import NavHeader from '../components/NavHeader.vue'
+
 export default {
     data() {
         return {
@@ -96,8 +100,17 @@ export default {
             },
         }
     },
+    components: {
+        'nav-header': NavHeader
+    },
     methods: {
         onSubmit() {
+            // 表单校验
+            if (!this.check()) {
+                return
+            }
+
+            // TODO 要把 [问题标题] 字段改为 NOT NULL
             this.showStep1 = false
             this.showStep2 = true
             let param = {
@@ -107,6 +120,19 @@ export default {
             }
             console.log("param: ", param)
             this.openMessageWarning('暂未开发')
+        },
+        check() {
+            if (this.form.questionTitle === '') {
+                this.openMessageWarning('问题标题不能为空')
+                return false
+            }
+            
+            if (this.form.questionContent === '') {
+                this.openMessageWarning('问题内容不能为空')
+                return false
+            }
+
+            return true
         },
         handleClose(tag) {
             this.form.tags.splice(this.form.tags.indexOf(tag), 1)
@@ -178,8 +204,9 @@ export default {
 
 .pane {
     /* padding: 10px 25px 0 25px; */
-    width: 100%;
+    width: 70%;
     height: 100%;
+    margin-left: 15%;
 }
 
 .el-tag + .el-tag {

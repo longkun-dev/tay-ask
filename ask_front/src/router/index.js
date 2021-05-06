@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import ask from '@/components/ask'
+import HelloWorld from '@/views/HelloWorld'
+import Ask from '@/views/Ask'
 
 Vue.use(Router)
 
@@ -13,8 +13,8 @@ export default new Router({
       component: HelloWorld
     }, {
       path: '/ask',
-      name: 'ask',
-      component: ask
+      name: 'Ask',
+      component: Ask
     }
   ]
 })
