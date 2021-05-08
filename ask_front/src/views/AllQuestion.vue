@@ -13,7 +13,8 @@
                         <h2>Top Questions</h2>
                         <el-button type="primary" @click="askQuestion">Ask Question</el-button>
                     </div>
-                    <question-item v-for="question in questions" :key="question.questionNo"
+                    <div class="question-number">21,191,897 questions</div>
+                    <question-item style="padding-left: 0px" v-for="question in questions" :key="question.questionNo"
                         :votes="question.votes" :answers="question.answers"
                         :views="question.views" :question-no="question.questionNo"
                         :question-title="question.questionTitle" :publish-time="question.publishTime"
@@ -27,7 +28,6 @@
 
 <script>
 import SideBar from '../components/SideBar.vue'
-import NavHeader from '../components/NavHeader.vue'
 import QuestionItem from '../components/QuestionItem.vue'
 import Header from '../components/Header.vue'
 
@@ -83,7 +83,6 @@ export default {
     },
     components: {
         'side-bar': SideBar,
-        'nav-header': NavHeader,
         'question-item': QuestionItem,
         'header1': Header
     },
@@ -140,5 +139,10 @@ export default {
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
+}
+
+.question-number {
+    font-size: 17px;
+    font-weight: bold;
 }
 </style>

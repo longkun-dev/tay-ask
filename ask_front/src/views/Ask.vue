@@ -2,16 +2,17 @@
     <div>
         <router-view></router-view>
         <div class="pane">
-            <nav-header></nav-header>
+            <!-- <nav-header></nav-header> -->
+            <header1></header1>
             <el-row>
-                <el-col :span="24">
+                <el-col :span="22" :offset="1">
                     <span class="question-title">Ask a public question</span>
                     <img class="img" src='../assets/images/background.svg'>
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="16">
-                    <el-form style="width: 90%" ref="form" :model="form" label-position="top" label-width="80px">
+                <el-col :span="14" :offset="1">
+                    <el-form style="width: 85%" ref="form" :model="form" label-position="top" label-width="80px">
                         <el-form-item label="Title">
                             <span>Be specific and imagine you’re asking a question to another person</span>
                             <el-input type="textarea" v-model="form.questionTitle" maxlength="120"
@@ -79,6 +80,7 @@
 
 <script>
 import NavHeader from '../components/NavHeader.vue'
+import Header from '../components/Header.vue'
 
 export default {
     data() {
@@ -101,7 +103,8 @@ export default {
         }
     },
     components: {
-        'nav-header': NavHeader
+        'nav-header': NavHeader,
+        'header1': Header
     },
     methods: {
         onSubmit() {
