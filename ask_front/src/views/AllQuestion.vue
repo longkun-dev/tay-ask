@@ -2,7 +2,6 @@
     <div class="pane">
         <router-view></router-view>
         <el-row>
-            <!-- <nav-header></nav-header> -->
             <header1></header1>
             <el-col :span="4">
                 <side-bar style="margin-top: 15px"></side-bar>
@@ -10,14 +9,17 @@
             <el-col :span="20">
                 <div class="main">
                     <div class="item">
-                        <h2>Top Questions</h2>
+                        <h2>All Questions</h2>
                         <el-button type="primary" @click="askQuestion">Ask Question</el-button>
                     </div>
                     <div class="question-number">21,191,897 questions</div>
-                    <question-item style="padding-left: 0px" v-for="question in questions" :key="question.questionNo"
+                    <question-item style="padding-left: 0px" v-for="question in questions"
+                        :key="question.questionNo"
                         :votes="question.votes" :answers="question.answers"
                         :views="question.views" :question-no="question.questionNo"
-                        :question-title="question.questionTitle" :publish-time="question.publishTime"
+                        :question-title="question.questionTitle"
+                        :questionContent="question.questionContent"
+                        :publish-time="question.publishTime"
                         :tags="question.tags" :asked-by="question.askedBy"
                         :created-by="question.createdBy"></question-item>
                 </div>
@@ -28,7 +30,7 @@
 
 <script>
 import SideBar from '../components/SideBar.vue'
-import QuestionItem from '../components/QuestionItem.vue'
+import QuestionItem from '../components/AllQuestionItem.vue'
 import Header from '../components/Header.vue'
 
 export default {
@@ -41,7 +43,7 @@ export default {
                 answers: 2,
                 views: 3,
                 questionTitle: 'How can I learn python fastly?',
-                questionContent: 'Test Content',
+                questionContent: 'I need to know the best way to perform user personalisation on react js whilst reducing the number of requests running through the dB because I‘m using a dB which changes per request. Thanks.',
                 tags: ["python", "pandas", "matplotlib", "seaborn"],
                 askedBy: 'Zenkage',
                 createdBy: 'Zenkage'

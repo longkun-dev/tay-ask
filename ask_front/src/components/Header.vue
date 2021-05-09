@@ -9,7 +9,9 @@
             </div>
             <div>
                 <el-input maxlength="100" v-model="searchContent"
-                    size="medium" placeholder="Search..."></el-input>
+                    size="medium" placeholder="Search...">
+                    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                </el-input>
             </div>
         </div>
         <div>
@@ -58,6 +60,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px;
+    border-bottom: 1px solid #eee;
 }
 
 .el-input {

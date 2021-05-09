@@ -65,7 +65,7 @@ export default ({
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 21px;
+    font-size: 20px;
     margin-right: 15px;
 }
 

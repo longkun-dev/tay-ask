@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/views/Index'
 import Ask from '@/views/Ask'
-import AllQuestion from '@/views/AllQuestion'
+import AllQuestions from '@/views/AllQuestion'
+import Tags from '@/views/Tags'
+import Login from '@/views/Login.vue'
 
 Vue.use(Router)
 
@@ -22,8 +24,16 @@ export default new Router({
             component: Ask
         }, {
             path: '/allQuestions',
-            name: 'AllQuestion',
-            component: AllQuestion
+            name: 'AllQuestions',
+            component: AllQuestions
+        }, {
+            path: '/tags',
+            name: 'Tags',
+            component: Tags
+        }, {
+            path: '/login',
+            name: 'Login',
+            component: Login
         }
     ]
 })

@@ -24,3 +24,33 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+
+
+
+前端问题记录：
+
+无法改变el-card的padding值，用el-card__body不生效？
+
+> 在scoped下选择无效，需要使用深度选择器，/deep/，类似：
+.el-card /deep/ .el-card__body {
+    padding: 10px;
+}
+
+
+
+Vue登录页面设置背景图片左侧和上面有白边？
+
+在App.vue中加上样式：
+position: absolute;
+top: 0px;
+left: 0px;
+
+同时将margin-top注释掉
+
+
+
+
+
+
+

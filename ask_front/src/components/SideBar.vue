@@ -1,6 +1,7 @@
 <template>
     <div>
-        <el-menu default-active='Home' class="el-menu-vertical-demo" @open="handleOpen"
+        <el-menu default-active='Home' :active="activeIndex" class="el-menu-vertical-demo"
+                @open="handleOpen"
                 @close="handleClose" @select="select">
             <el-menu-item index="Home">
                 <span slot="title">Home</span>
@@ -21,6 +22,7 @@
 export default {
     data: function() {
         return {
+            activeIndex: 'Home'
         }
     },
     methods: {
@@ -33,13 +35,19 @@ export default {
         select(index, indexPath) {
             switch(index) {
                 case 'Home':
+                    this.activeIndex = 'Home'
                     this.$router.push({path: '/', query: {}})
                     break
                 case 'Questions':
+                    this.activeIndex = 'Questions'
                     this.$router.push({path: '/allQuestions', query: {}})
                     break
+                case 'Tags':
+                    this.activeIndex = 'Tags'
+                    this.$router.push({path: '/tags', query: {}})
+                    break
             }
-            console.log("index: ", index, "  indexPath: ", indexPath)
+            // console.log("index: ", index, "  indexPath: ", indexPath)
         }
     }
 };
