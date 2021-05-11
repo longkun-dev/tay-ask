@@ -20,26 +20,27 @@
     </sql>
 
     <select id="queryByUserId" resultMap="BaseResultMap" parameterType="string">
-        select user_id
-        from try_ask.ask_user
+        select
+        <include refid="Base_Column_List"/>
+        from ask_user
         where user_id = #{userId}
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from try_ask.ask_user
+        from ask_user
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete
-        from try_ask.ask_user
+        from ask_user
         where id = #{id,jdbcType=VARCHAR}
     </delete>
 
     <insert id="insert" parameterType="com.ask.qa_service.entity.po.AskUserPo">
-        insert into try_ask.ask_user (id,
+        insert into ask_user (id,
                                       user_id,
                                       username,
                                       password,
@@ -58,7 +59,7 @@
     </insert>
 
     <insert id="insertSelective" parameterType="com.ask.qa_service.entity.po.AskUserPo">
-        insert into try_ask.ask_user
+        insert into ask_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -114,7 +115,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.ask.qa_service.entity.po.AskUserPo">
-        update try_ask.ask_user
+        update ask_user
         <set>
             <if test="userId != null">
                 user_id = #{userId,jdbcType=VARCHAR},
@@ -142,7 +143,7 @@
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.ask.qa_service.entity.po.AskUserPo">
-        update try_ask.ask_user
+        update ask_user
         set user_id         = #{userId,jdbcType=VARCHAR},
             username        = #{username,jdbcType=VARCHAR},
             password        = #{password,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <template>
     <div id="login_main">
         <div class="login-box">
-            <h1 style="color: white">登录之后更精彩</h1>
+            <h1 style="color: white">登录</h1>
             <el-form ref="form" :model="form" style="width: 50%;">
                 <el-form-item label="">
                     <el-input v-model="form.userId" placeholder="用户名.."></el-input>
@@ -25,22 +25,25 @@ export default {
         return {
             backgroundImage: image,
             form: {
-                userId: '',
-                password: ''
+                userId: 'U0001',
+                password: '123'
             }
         }
     },
     methods: {
         login() {
-            if (this.form.userId === 'admin' && this.form.password === '123') {
-                this.openMessageSuccess('登录成功，即将进入首页...')
-                let self = this
-                setTimeout(function() {
-                    self.$router.push({path: '/', query: {}})
-                }, 1000)
-            } else {
-                this.openMessageError('用户名或密码错误，请重试！')
+            if (this.form.userId === '' || this.form.password === '') {
+                this.openMessageWarning('用户名和密码不能为空')
+                return
             }
+            let param = this.form
+            this.axios.post('auth/login', param).then((res) => {
+                if (res.data.code === 200) {
+                    this.openMessageSuccess(res.data.message)
+                } else {
+                    this.openMessageError(res.data.message)
+                }
+            })
         },
         resetForm() {
             this.form.userId = '',

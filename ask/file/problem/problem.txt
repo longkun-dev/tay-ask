@@ -40,3 +40,31 @@
 > 怎么运行generatorConfig.xml文件？
 > 先选中模块pom.xml，然后maven > generate sources and updated
 > 到侧边栏Maven > module > Plugins > 下拉插件 > 运行
+
+
+> 启动eureka客户端日志卡在：
+Re-registering apps/ASK-QA-SERVICE
+registering service...
+registration status: 204
+
+> 可能是缺少jar包，也可能是右端点未取消，程序卡在了断点，
+> 本次原因是未启动数据库未启动
+> Error creating bean with name 'dataSource' defined in class path resource
+
+
+
+配置了@MapperScan(**.dao)仍然包invalid bound statement?
+src/main/java下的*.xml文件默认不会打包进jar包里，配置一下pom.xml
+
+<resources>
+    <resource>
+        <directory>src/main/java</directory>
+        <includes>
+            <include>**/*.xml</include>
+        </includes>
+        <filtering>false</filtering>
+    </resource>
+    <resource>
+        <directory>src/main/resources</directory>
+    </resource>
+</resources>

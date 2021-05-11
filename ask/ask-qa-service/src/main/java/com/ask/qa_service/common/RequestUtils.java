@@ -3,11 +3,11 @@ package com.ask.qa_service.common;
 import com.ask.qa_service.dao.AskUserDao;
 import com.ask.qa_service.entity.po.AskUserPo;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class RequestUtils {
 
-    @Resource
+    @Autowired
     private static AskUserDao userDao;
 
     public static HttpServletRequest getRequest() {

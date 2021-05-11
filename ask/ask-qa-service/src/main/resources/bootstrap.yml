@@ -18,3 +18,9 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:9000/eureka/
+logging:
+  level:
+    com:
+      ask:
+        qa_service:
+          dao: debug

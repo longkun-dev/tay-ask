@@ -15,10 +15,6 @@ export default new Router({
             name: 'Index',
             component: Index
         }, {
-            path: '/index',
-            name: 'Index',
-            component: Index
-        }, {
             path: '/ask',
             name: 'Ask',
             component: Ask
