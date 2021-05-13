@@ -1,20 +1,12 @@
 <template>
-    <div>
-        <el-menu default-active='Home' :active="activeIndex" class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose" @select="select">
-            <el-menu-item index="Home">
-                <span slot="title">Home</span>
-            </el-menu-item>
-            <el-menu-item index="Questions">
-                <span slot="title">Questions</span>
-            </el-menu-item>
-            <el-menu-item index="Tags">
-                <span slot="title">Tags</span>
-            </el-menu-item>
-            <el-menu-item index="Users">
-                <span slot="title">Users</span>
-            </el-menu-item>
+    <div style="padding-left: 15px">
+        <el-menu :default-active='$route.name' class="el-menu-vertical-demo"
+                router
+                @open="handleOpen" @close="handleClose">
+            <el-menu-item index="/">Home</el-menu-item>
+            <el-menu-item index="allQuestions">Questions</el-menu-item>
+            <el-menu-item index="tags">Tags</el-menu-item>
+            <el-menu-item index="users">Users</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -22,38 +14,20 @@
 export default {
     data: function() {
         return {
-            activeIndex: 'Home'
         }
     },
     methods: {
         handleOpen(key, keyPath) {
-            console.log(key, keyPath)
+            // console.log(key, keyPath)
         },
         handleClose(key, keyPath) {
-            console.log(key, keyPath)
-        },
-        select(index, indexPath) {
-            switch(index) {
-                case 'Home':
-                    this.activeIndex = 'Home'
-                    this.$router.push({path: '/', query: {}})
-                    break
-                case 'Questions':
-                    this.activeIndex = 'Questions'
-                    this.$router.push({path: '/allQuestions', query: {}})
-                    break
-                case 'Tags':
-                    this.activeIndex = 'Tags'
-                    this.$router.push({path: '/tags', query: {}})
-                    break
-            }
-            // console.log("index: ", index, "  indexPath: ", indexPath)
+            // console.log(key, keyPath)
         }
     }
 };
 </script>
 <style scoped>
-span {
+.el-menu-item {
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     /* font-weight: bold; */

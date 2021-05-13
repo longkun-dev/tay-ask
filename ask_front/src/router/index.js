@@ -5,31 +5,42 @@ import Ask from '@/views/Ask'
 import AllQuestions from '@/views/AllQuestion'
 import Tags from '@/views/Tags'
 import Login from '@/views/Login.vue'
+import User from '@/views/Users.vue'
 
 Vue.use(Router)
+
+const originalPush = Router.prototype.push
+
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Index',
+            name: '/',
             component: Index
         }, {
             path: '/ask',
-            name: 'Ask',
+            name: 'ask',
             component: Ask
         }, {
             path: '/allQuestions',
-            name: 'AllQuestions',
+            name: 'allQuestions',
             component: AllQuestions
         }, {
             path: '/tags',
-            name: 'Tags',
+            name: 'tags',
             component: Tags
         }, {
             path: '/login',
-            name: 'Login',
+            name: 'login',
             component: Login
+        }, {
+            path: '/users',
+            name: 'users',
+            component: User
         }
     ]
 })
