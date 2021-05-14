@@ -6,12 +6,16 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import { isEmpty, isNotEmpty } from './utils/util'
 
 Vue.prototype.axios = axios
 
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+
+Vue.prototype.isEmpty = isEmpty
+Vue.prototype.isNotEmpty = isNotEmpty
 
 /* eslint-disable no-new */
 new Vue({

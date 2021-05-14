@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.util.Objects;
 
 /**
@@ -43,11 +44,15 @@ public class AuthServiceImpl implements AuthService {
         HttpServletRequest request = RequestUtils.getRequest();
         String cookieInfo = request.getHeader("Cookie");
         if (StringUtils.isEmpty(cookieInfo) || !cookieInfo.contains("askCookie")) {
-            Cookie cookie = new Cookie("askCookie", "userId=" + userId
-                    + "&role=" + askUserPo.getRole());
-            cookie.setPath("/");
-            HttpServletResponse response = RequestUtils.getResponse();
-            response.addCookie(cookie);
+            try {
+                Cookie cookie = new Cookie("askCookie", URLEncoder.encode("userId="
+                        + userId + ";role=" + askUserPo.getRole(), "UTF-8"));
+                cookie.setPath("/");
+                HttpServletResponse response = RequestUtils.getResponse();
+                response.addCookie(cookie);
+            } catch (Exception e) {
+                return errorMsg + "添加Cookie失败";
+            }
         } else {
             // 更新cookie失效时间
             log.info("Cookie为: {}, 已更新cookie过期时间", cookieInfo);
