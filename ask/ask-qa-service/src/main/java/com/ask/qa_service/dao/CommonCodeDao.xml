@@ -27,8 +27,13 @@
     </sql>
 
     <insert id="insert" parameterType="com.ask.qa_service.entity.po.CommonCodePo">
-        insert into common_code (id, code_name, code_value, remark,
-                                 created_by, created_time, updated_by,
+        insert into common_code (id,
+                                 code_name,
+                                 code_value,
+                                 remark,
+                                 created_by,
+                                 created_time,
+                                 updated_by,
                                  updated_time)
         VALUES (#{id},
                 #{codeName},
@@ -41,10 +46,19 @@
         ON DUPLICATE KEY UPDATE id = #{id}
     </insert>
 
+    <update id="updateCodeValueByCodeName" parameterType="java.lang.String">
+        update common_code
+        set code_value = #{codeValue}
+        where code_name = #{codeName}
+    </update>
+
     <select id="selectByCodeName" resultMap="BaseResultMap">
-        select code_name,
+        select id,
+               code_name,
                code_value,
-               remark
+               remark,
+               created_by,
+               updated_by
         from common_code
         where code_name = #{codeName}
     </select>
