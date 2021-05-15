@@ -17,4 +17,12 @@ public interface QuestionService {
      * @return 处理结果
      */
     String newQuestion(AskQuestionPo questionPo);
+
+    /**
+     * 根据问题编号查询问题
+     *
+     * @param questionNo 问题编号
+     * @return 对应的问题
+     */
+    AskQuestionPo getQuestion(String questionNo);
 }
