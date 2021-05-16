@@ -13,7 +13,7 @@ public enum ResultEnum {
 
     ERROR(500, "请求失败"),
 
-    BAD_REQUEST(400, "错误的请求"),
+    BAD_REQUEST(400, "请求错误"),
 
     NO_PERMISSION(401, "无访问权限");
 

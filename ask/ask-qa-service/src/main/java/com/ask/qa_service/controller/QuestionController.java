@@ -16,17 +16,19 @@ import javax.annotation.Resource;
  * @author zhulongkun20@163.com
  * @since 2021/4/30 11:54 PM
  */
-@Api(tags = "问题接口")
+
+@Api(tags = "问题api")
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/")
 public class QuestionController {
 
     @Resource
     private QuestionService questionService;
 
-    @ApiOperation(value = "创建问题", notes = "创建新问题")
-    @ApiParam(name = "questionPo", required = true)
-    @PostMapping("/new")
+
+    @ApiOperation(value = "创建新的问题", notes = "创建一个新的问题")
+    @ApiParam(name = "问题是实体类", value = "questionPo")
+    @PostMapping("/question")
     public ResponseEntity<String> newQuestion(@RequestBody AskQuestionPo questionPo) {
         String resultMsg = questionService.newQuestion(questionPo);
         if (StringUtils.isNotEmpty(resultMsg) && !resultMsg.contains("失败")) {
@@ -41,5 +43,12 @@ public class QuestionController {
     @GetMapping("/question/{questionNo}")
     public ResponseEntity<AskQuestionPo> getQuestion(@PathVariable("questionNo") String questionNo) {
         return ResponseUtils.success(questionService.getQuestion(questionNo));
+    }
+
+    @ApiOperation(value = "根据问题编号删除一个问题", notes = "根据问题编号删除一个问题")
+    @ApiParam(name = "问题编号", value = "questionNo")
+    @DeleteMapping("/question/{questionNo}")
+    public ResponseEntity<String> deleteQuestion(@PathVariable("questionNo") String questionNo) {
+        return null;
     }
 }

@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         login() {
-            if (this.form.userId === '' || this.form.password === '') {
+            if (this.isEmpty(this.form.userId) || this.isEmpty(this.form.password)) {
                 this.openMessageWarning('用户名和密码不能为空')
                 return
             }
@@ -40,6 +40,9 @@ export default {
             this.axios.post('auth/login', param).then((res) => {
                 if (res.data.code === 200) {
                     this.openMessageSuccess(res.data.message)
+                    setTimeout(() => {
+                        this.$router.push({path: '/', query: {}})
+                    }, 1500)
                 } else {
                     this.openMessageError(res.data.message)
                 }

@@ -5,7 +5,7 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="question_no" jdbcType="VARCHAR" property="questionNo"/>
         <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"/>
-        <result column="question_content" jdbcType="VARCHAR" property="questionContent"/>
+        <result column="question_title" jdbcType="VARCHAR" property="questionTitle"/>
         <result column="votes" jdbcType="INTEGER" property="votes"/>
         <result column="answers" jdbcType="INTEGER" property="answers"/>
         <result column="views" jdbcType="INTEGER" property="views"/>
@@ -38,8 +38,8 @@
     <insert id="insert" parameterType="com.ask.qa_service.entity.po.AskQuestionPo">
         insert into try_ask.ask_question (id,
                                           question_no,
+                                          question_title,
                                           publish_time,
-                                          question_content,
                                           votes,
                                           answers,
                                           views,
@@ -49,8 +49,8 @@
                                           updated_by)
         values (#{id,jdbcType=VARCHAR},
                 #{questionNo,jdbcType=VARCHAR},
+                #{questionTitle,jdbcType=VARCHAR},
                 #{publishTime,jdbcType=TIMESTAMP},
-                #{questionContent,jdbcType=VARCHAR},
                 #{votes,jdbcType=INTEGER},
                 #{answers,jdbcType=INTEGER},
                 #{views,jdbcType=INTEGER},
@@ -72,8 +72,8 @@
             <if test="publishTime != null">
                 publish_time,
             </if>
-            <if test="questionContent != null">
-                question_content,
+            <if test="questionTitle != null">
+                question_title,
             </if>
             <if test="votes != null">
                 votes,
@@ -107,8 +107,8 @@
             <if test="publishTime != null">
                 #{publishTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="questionContent != null">
-                #{questionContent,jdbcType=VARCHAR},
+            <if test="questionTitle != null">
+                #{questionTitle},
             </if>
             <if test="votes != null">
                 #{votes,jdbcType=INTEGER},
@@ -143,8 +143,8 @@
             <if test="publishTime != null">
                 publish_time = #{publishTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="questionContent != null">
-                question_content = #{questionContent,jdbcType=VARCHAR},
+            <if test="questionTitle != null">
+                question_title = #{questionTitle,jdbcType=VARCHAR},
             </if>
             <if test="votes != null">
                 votes = #{votes,jdbcType=INTEGER},
@@ -172,16 +172,16 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ask.qa_service.entity.po.AskQuestionPo">
         update try_ask.ask_question
-        set question_no      = #{questionNo,jdbcType=VARCHAR},
-            publish_time     = #{publishTime,jdbcType=TIMESTAMP},
-            question_content = #{questionContent,jdbcType=VARCHAR},
-            votes            = #{votes,jdbcType=INTEGER},
-            answers          = #{answers,jdbcType=INTEGER},
-            views            = #{views,jdbcType=INTEGER},
-            tags             = #{tags,jdbcType=VARCHAR},
-            asked_by         = #{askedBy,jdbcType=VARCHAR},
-            updated_by       = #{updatedBy,jdbcType=VARCHAR},
-            updated_time     = #{updatedTime,jdbcType=TIMESTAMP}
+        set question_no    = #{questionNo,jdbcType=VARCHAR},
+            publish_time   = #{publishTime,jdbcType=TIMESTAMP},
+            question_title = #{questionTontent,jdbcType=VARCHAR},
+            votes          = #{votes,jdbcType=INTEGER},
+            answers        = #{answers,jdbcType=INTEGER},
+            views          = #{views,jdbcType=INTEGER},
+            tags           = #{tags,jdbcType=VARCHAR},
+            asked_by       = #{askedBy,jdbcType=VARCHAR},
+            updated_by     = #{updatedBy,jdbcType=VARCHAR},
+            updated_time   = #{updatedTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>

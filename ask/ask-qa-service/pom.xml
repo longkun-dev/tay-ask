@@ -89,6 +89,7 @@
             <version>5.6.3</version>
         </dependency>
 
+        <!--Swagger 框架-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
