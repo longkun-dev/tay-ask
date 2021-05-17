@@ -25,4 +25,12 @@ public interface QuestionService {
      * @return 对应的问题
      */
     AskQuestionPo getQuestion(String questionNo);
+
+    /**
+     * 根据问题编号删除一个问题
+     *
+     * @param questionNo 问题编号
+     * @return 删除成功或失败
+     */
+    int deleteQuestion(String questionNo);
 }

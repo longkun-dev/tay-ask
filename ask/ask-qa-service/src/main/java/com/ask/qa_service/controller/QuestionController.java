@@ -1,7 +1,9 @@
 package com.ask.qa_service.controller;
 
+import com.ask.qa_service.common.PermissionCheck;
 import com.ask.qa_service.common.ResponseEntity;
 import com.ask.qa_service.common.ResponseUtils;
+import com.ask.qa_service.constant.RoleEnum;
 import com.ask.qa_service.entity.po.AskQuestionPo;
 import com.ask.qa_service.service.QuestionService;
 import io.swagger.annotations.Api;
@@ -25,7 +27,7 @@ public class QuestionController {
     @Resource
     private QuestionService questionService;
 
-
+    @PermissionCheck(roles = {RoleEnum.R_USER, RoleEnum.R_ADMIN})
     @ApiOperation(value = "创建新的问题", notes = "创建一个新的问题")
     @ApiParam(name = "问题是实体类", value = "questionPo")
     @PostMapping("/question")
@@ -38,6 +40,7 @@ public class QuestionController {
         }
     }
 
+    @PermissionCheck(roles = RoleEnum.R_USER)
     @ApiOperation(value = "获取问题编号为question的问题的信息", notes = "获取问题编号为question的问题的信息")
     @ApiParam(name = "questionNo", required = true)
     @GetMapping("/question/{questionNo}")
@@ -45,10 +48,11 @@ public class QuestionController {
         return ResponseUtils.success(questionService.getQuestion(questionNo));
     }
 
+    @PermissionCheck(roles = RoleEnum.R_USER)
     @ApiOperation(value = "根据问题编号删除一个问题", notes = "根据问题编号删除一个问题")
     @ApiParam(name = "问题编号", value = "questionNo")
     @DeleteMapping("/question/{questionNo}")
-    public ResponseEntity<String> deleteQuestion(@PathVariable("questionNo") String questionNo) {
-        return null;
+    public ResponseEntity<Integer> deleteQuestion(@PathVariable("questionNo") String questionNo) {
+        return ResponseUtils.success(questionService.deleteQuestion(questionNo));
     }
 }

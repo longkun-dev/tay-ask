@@ -1,5 +1,7 @@
 package com.ask.qa_service.common;
 
+import com.ask.qa_service.constant.RoleEnum;
+
 import java.lang.annotation.*;
 
 /**
@@ -9,7 +11,8 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Auth {
+public @interface PermissionCheck {
 
-    String roles() default "";
+    // 可以访问某个接口的权限集合
+    RoleEnum[] roles();
 }

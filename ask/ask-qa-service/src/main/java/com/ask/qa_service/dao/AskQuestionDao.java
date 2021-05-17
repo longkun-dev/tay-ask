@@ -6,6 +6,8 @@ public interface AskQuestionDao {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteByQuestionNo(String questionNo);
+
     int insert(AskQuestionPo record);
 
     int insertSelective(AskQuestionPo record);

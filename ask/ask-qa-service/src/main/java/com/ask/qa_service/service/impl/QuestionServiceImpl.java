@@ -103,4 +103,12 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return questionDao.selectByPrimaryKey(questionNo);
     }
+
+    @Override
+    public int deleteQuestion(String questionNo) {
+        if (StringUtils.isEmpty(questionNo)) {
+            return 0;
+        }
+        return questionDao.deleteByQuestionNo(questionNo);
+    }
 }

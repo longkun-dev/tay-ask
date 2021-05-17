@@ -35,6 +35,11 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
 
+    <delete id="deleteByQuestionNo" parameterType="string">
+        delete from ask_question
+        where question_no = #{questionNo}
+    </delete>
+
     <insert id="insert" parameterType="com.ask.qa_service.entity.po.AskQuestionPo">
         insert into try_ask.ask_question (id,
                                           question_no,
