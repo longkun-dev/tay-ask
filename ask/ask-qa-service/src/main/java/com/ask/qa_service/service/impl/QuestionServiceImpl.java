@@ -75,6 +75,7 @@ public class QuestionServiceImpl implements QuestionService {
      */
     private String generateQuestionNo() {
         String newQuestionNo;
+        // FIXME: 2021/5/18 需要按日期递增问题编号
         CommonCodePo codePo = codeDao.selectByCodeName(Constant.LATEST_QUESTION_ID);
         if (codePo != null && StringUtils.isNotEmpty(codePo.getCodeValue())) {
             String baseNum = codePo.getCodeValue().substring(9);
@@ -83,7 +84,8 @@ public class QuestionServiceImpl implements QuestionService {
             codeDao.updateCodeValueByCodeName(Constant.LATEST_QUESTION_ID,
                     newQuestionNo);
         } else {
-            newQuestionNo = Constant.QUESTION_ID_PREFIX + dateFormat.format(new Date()) + Constant.QUESTION_ID_START;
+            newQuestionNo = Constant.QUESTION_ID_PREFIX + dateFormat.format(new Date())
+                    + Constant.QUESTION_ID_START;
             codePo = new CommonCodePo();
             codePo.setId(UUIDUtils.randomUUID36());
             codePo.setCodeValue(newQuestionNo);
@@ -101,7 +103,7 @@ public class QuestionServiceImpl implements QuestionService {
         if (StringUtils.isEmpty(questionNo)) {
             return null;
         }
-        return questionDao.selectByPrimaryKey(questionNo);
+        return questionDao.selectByQuestionNo(questionNo);
     }
 
     @Override

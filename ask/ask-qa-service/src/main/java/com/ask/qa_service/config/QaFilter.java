@@ -49,13 +49,13 @@ public class QaFilter implements Filter {
         // 鉴权
         HttpServletRequest request = RequestUtils.getRequest();
         String cookie = request.getHeader("Cookie");
-        if (!StringUtils.isEmpty(cookie)) {
+//        if (!StringUtils.isEmpty(cookie)) {
             filterChain.doFilter(servletRequest, servletResponse);
-        } else {
-            HttpServletResponse response = RequestUtils.getResponse();
-            response.setStatus(302);
-            response.sendRedirect("/login");
-        }
+//        } else {
+//            HttpServletResponse response = RequestUtils.getResponse();
+//            response.setStatus(302);
+//            response.sendRedirect("/login");
+//        }
         long endTime = System.currentTimeMillis();
         String requestURI = request.getRequestURI();
         log.info("请求 {} 耗时 {} 秒", requestURI, (endTime - startTime) / 1000.0);

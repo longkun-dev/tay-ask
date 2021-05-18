@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * @since 2021/4/30 11:54 PM
  */
 
-@Api(tags = "问题api")
+@Api(tags = "Question Api")
 @RestController
 @RequestMapping("/")
 public class QuestionController {

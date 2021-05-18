@@ -1,9 +1,11 @@
 package com.ask.qa_service.entity.po;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.Date;
 
+@ApiModel(description = "问题回答实体类")
 @Data
 public class AskAnswersContentPo {
     private String id;

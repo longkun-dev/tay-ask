@@ -14,6 +14,8 @@ public interface AskQuestionDao {
 
     AskQuestionPo selectByPrimaryKey(String id);
 
+    AskQuestionPo selectByQuestionNo(String questionNo);
+
     int updateByPrimaryKeySelective(AskQuestionPo record);
 
     int updateByPrimaryKey(AskQuestionPo record);

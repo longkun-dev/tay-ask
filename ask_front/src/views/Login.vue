@@ -40,9 +40,7 @@ export default {
             this.axios.post('auth/login', param).then((res) => {
                 if (res.data.code === 200) {
                     this.openMessageSuccess(res.data.message)
-                    setTimeout(() => {
-                        this.$router.push({path: '/', query: {}})
-                    }, 1500)
+                    this.$router.push({path: '/', query: {}})
                 } else {
                     this.openMessageError(res.data.message)
                 }

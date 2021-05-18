@@ -34,7 +34,7 @@
                                 + New Tag</el-button>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="onSubmit">Post your question</el-button>
+                            <el-button type="primary" @click="onSubmit" :disabled="editFlag">Post your question</el-button>
                         </el-form-item>
                     </el-form>
                 </el-col>
@@ -100,6 +100,7 @@ export default {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "100% 100%",
             },
+            editFlag: false
         }
     },
     components: {
@@ -113,16 +114,25 @@ export default {
                 return
             }
 
-            // TODO 要把 [问题标题] 字段改为 NOT NULL
-            this.showStep1 = false
-            this.showStep2 = true
+            if (this.showStep1) {
+                this.showStep1 = false
+                this.showStep2 = true
+                return
+            }
+            
             let param = {
                 'questionTitle': this.form.questionTitle,
                 'questionContent': this.form.questionContent,
                 'tags': this.form.tags.join(';')
             }
-            console.log("param: ", param)
-            this.openMessageWarning('暂未开发')
+            this.axios.post('/question', param).then((res) => {
+                if (res.code = 200) {
+                    this.openMessageSuccess('问题发布成功')
+                    this.editFlag = true
+                } else {
+                    this.openMessageError('问题发布失败，请重试')
+                }
+            })
         },
         check() {
             if (this.form.questionTitle === '') {

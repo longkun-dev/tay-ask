@@ -1,13 +1,15 @@
 package com.ask.qa_service.entity.po;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 基础变量表
  * 表名: common_code
  */
+//@ApiModel("通用码表")
 @Data
 public class CommonCodePo implements Serializable {
     /**

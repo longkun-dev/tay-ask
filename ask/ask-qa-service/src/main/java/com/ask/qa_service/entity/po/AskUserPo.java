@@ -1,9 +1,11 @@
 package com.ask.qa_service.entity.po;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.Date;
 
+@ApiModel("用户实体类")
 @Data
 public class AskUserPo {
     private String id;
