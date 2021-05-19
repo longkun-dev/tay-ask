@@ -23,4 +23,22 @@ public class Constant {
      * 问题编号起始编号
      */
     public static final String QUESTION_ID_START = "000001";
+
+
+    /**
+     * cookie中用户id对应的key
+     */
+    public static final String COOKIE_USER_ID = "userId";
+
+
+    /**
+     * cookie中用户角色对应的key
+     */
+    public static final String COOKIE_ROLE = "role";
+
+
+    /**
+     * 日期格式 yyyyMMdd
+     */
+    public static final String DATE_FORMAT_yyyyMMdd = "yyyyMMdd";
 }

@@ -1,5 +1,6 @@
 package com.ask.qa_service.common;
 
+import com.ask.qa_service.constant.Constant;
 import com.ask.qa_service.dao.AskUserDao;
 import com.ask.qa_service.entity.po.AskUserPo;
 import org.apache.commons.lang.StringUtils;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,17 +38,24 @@ public class RequestUtils {
     }
 
     public static String getCurrentUserId() {
+        String currentUserId = null;
         HttpServletRequest request = getRequest();
-        return request.getHeader("userId");
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (Constant.COOKIE_USER_ID.equals(cookie.getName())) {
+                currentUserId = cookie.getValue();
+            }
+        }
+        return currentUserId;
     }
 
     public static String getCurrentUserRole() {
-        String userId = getCurrentUserId();
-        if (StringUtils.isEmpty(userId)) {
+        String currentUserId = getCurrentUserId();
+        if (StringUtils.isEmpty(currentUserId)) {
             return null;
         }
-        AskUserPo userPo = userDao.queryByUserId(userId);
-        if (userPo == null) {
+        AskUserPo userPo = userDao.queryByUserId(currentUserId);
+        if (userPo == null || StringUtils.isEmpty(userPo.getRole())) {
             return null;
         }
         return userPo.getRole();

@@ -119,7 +119,7 @@ export default {
                 this.showStep2 = true
                 return
             }
-            
+            this.editFlag = true
             let param = {
                 'questionTitle': this.form.questionTitle,
                 'questionContent': this.form.questionContent,
@@ -128,19 +128,19 @@ export default {
             this.axios.post('/question', param).then((res) => {
                 if (res.code = 200) {
                     this.openMessageSuccess('问题发布成功')
-                    this.editFlag = true
                 } else {
                     this.openMessageError('问题发布失败，请重试')
                 }
+                this.editFlag = false
             })
         },
         check() {
-            if (this.form.questionTitle === '') {
+            if (this.isEmpty(this.form.questionTitle)) {
                 this.openMessageWarning('问题标题不能为空')
                 return false
             }
             
-            if (this.form.questionContent === '') {
+            if (this.isEmpty(this.form.questionContent)) {
                 this.openMessageWarning('问题内容不能为空')
                 return false
             }

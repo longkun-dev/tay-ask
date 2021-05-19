@@ -1,6 +1,7 @@
 package com.ask.qa_service.service.impl;
 
 import com.ask.qa_service.common.RequestUtils;
+import com.ask.qa_service.constant.Constant;
 import com.ask.qa_service.dao.AskUserDao;
 import com.ask.qa_service.entity.po.AskUserPo;
 import com.ask.qa_service.service.AuthService;
@@ -43,13 +44,17 @@ public class AuthServiceImpl implements AuthService {
 
         HttpServletRequest request = RequestUtils.getRequest();
         String cookieInfo = request.getHeader("Cookie");
-        if (StringUtils.isEmpty(cookieInfo) || !cookieInfo.contains("askCookie")) {
+        if (StringUtils.isEmpty(cookieInfo) || !cookieInfo.contains(Constant.COOKIE_USER_ID)
+                || !cookieInfo.contains(Constant.COOKIE_ROLE)) {
             try {
-                Cookie cookie = new Cookie("askCookie", URLEncoder.encode("userId="
-                        + userId + ";role=" + askUserPo.getRole(), "UTF-8"));
-                cookie.setPath("/");
+                Cookie cookie1 = new Cookie(Constant.COOKIE_USER_ID, userId);
+                Cookie cookie2 = new Cookie(Constant.COOKIE_ROLE, askUserPo.getRole());
+                cookie1.setPath("/");
+                cookie2.setPath("/");
+
                 HttpServletResponse response = RequestUtils.getResponse();
-                response.addCookie(cookie);
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
             } catch (Exception e) {
                 return errorMsg + "添加Cookie失败";
             }

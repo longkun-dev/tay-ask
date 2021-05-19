@@ -39,4 +39,10 @@ public class QuestionServiceImplTest {
         System.out.println(result);
         System.out.println(Integer.parseInt(questionId.substring(9)) + 1);
     }
+
+    @Test
+    public void generateQuestionNoTest() {
+        String questionNo = questionService.generateQuestionNo();
+        log.info("questionNo: {}", questionNo);
+    }
 }

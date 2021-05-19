@@ -10,7 +10,7 @@
                     <el-input type="password" v-model="form.password" placeholder="登录密码"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="login">登录</el-button>
+                    <el-button type="primary" @click="login" :disabled="loginBtnDisabled">登录</el-button>
                     <el-button type="info" @click="resetForm">重置</el-button>
                 </el-form-item>
             </el-form>
@@ -27,7 +27,8 @@ export default {
             form: {
                 userId: 'U0001',
                 password: '123'
-            }
+            },
+            loginBtnDisabled: false
         }
     },
     methods: {
@@ -36,6 +37,7 @@ export default {
                 this.openMessageWarning('用户名和密码不能为空')
                 return
             }
+            this.loginBtnDisabled = true
             let param = this.form
             this.axios.post('auth/login', param).then((res) => {
                 if (res.data.code === 200) {
@@ -44,6 +46,7 @@ export default {
                 } else {
                     this.openMessageError(res.data.message)
                 }
+                this.loginBtnDisabled = false
             })
         },
         resetForm() {

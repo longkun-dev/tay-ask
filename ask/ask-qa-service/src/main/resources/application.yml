@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 12345678
-    url: jdbc:mysql://127.0.0.1:3306/try_ask?serverTimezone=UTC
+    url: jdbc:mysql://192.227.150.122:3306/try_ask?useUnicode=true&characterEncoding=UTF-8&useSSL=FALSE&serverTimezone=CTT
     druid:
       initial-size: 10
       max-active: 20

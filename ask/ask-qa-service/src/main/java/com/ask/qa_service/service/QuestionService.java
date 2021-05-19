@@ -19,6 +19,13 @@ public interface QuestionService {
     String newQuestion(AskQuestionPo questionPo);
 
     /**
+     * 生成一个可用的问题编号
+     *
+     * @return 一个可用的问题编号
+     */
+    String generateQuestionNo();
+
+    /**
      * 根据问题编号查询问题
      *
      * @param questionNo 问题编号

@@ -68,3 +68,27 @@ src/main/java下的*.xml文件默认不会打包进jar包里，配置一下pom.x
         <directory>src/main/resources</directory>
     </resource>
 </resources>
+
+
+
+MySQL中文乱码问题解决：
+> show variables like '%char%'; 查看当前编码
+
+将下面的配置复制到 /etc/mysql/my.cnf 中
+[mysqld]
+character-set-server=utf8
+[client]
+default-character-set=utf8
+[mysql]
+default-character-set=utf8
+
+然后重启MySQL即可。
+
+
+
+
+数据插入到MySQL中的时间与Java中的new Date()时间不一致？
+> 可能是因为MySQL的时区设置问题；
+> 可能是因为jdbc的连接url中没有指定或者错误制定了serverTimezone
+> serverTimezone=UTC或者serverTimezone=CTT
+> UTC为国际标准时间，CTT为上海时间

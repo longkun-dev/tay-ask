@@ -15,8 +15,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, user_id, username, password, role, last_login_time, created_by, created_time,
-        updated_by, updated_time
+        id, user_id, username, `password`, `role`, last_login_time
     </sql>
 
     <select id="queryByUserId" resultMap="BaseResultMap" parameterType="string">

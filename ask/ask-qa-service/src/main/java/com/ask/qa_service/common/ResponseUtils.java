@@ -19,9 +19,9 @@ public class ResponseUtils {
         return new ResponseEntity<>(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage());
     }
 
-    public static <T> ResponseEntity<T> success(String message) {
-        return new ResponseEntity<>(ResultEnum.SUCCESS.getCode(), message);
-    }
+//    public static <T> ResponseEntity<T> success(String message) {
+//        return new ResponseEntity<>(ResultEnum.SUCCESS.getCode(), message);
+//    }
 
     public static <T> ResponseEntity<T> success(String message, T data) {
         return new ResponseEntity<>(ResultEnum.SUCCESS.getCode(), message, data);

@@ -10,8 +10,7 @@ public interface CommonCodeDao {
 
     int insert(CommonCodePo commonCodePo);
 
-    int updateCodeValueByCodeName(@Param("codeName") String codeName,
-                                  @Param("codeValue") String codeValue);
+    int updateCodeValueByCodeName(CommonCodePo commonCodePo);
 
     CommonCodePo selectByCodeName(String codeName);
 
