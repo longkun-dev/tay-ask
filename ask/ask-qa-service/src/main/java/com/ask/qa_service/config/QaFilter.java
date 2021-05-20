@@ -1,13 +1,14 @@
 package com.ask.qa_service.config;
 
 import com.ask.qa_service.common.RequestUtils;
+import com.ask.qa_service.exception.AskException;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -22,9 +23,10 @@ public class QaFilter implements Filter {
 
     }
 
+    @SneakyThrows
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
-                         FilterChain filterChain) throws IOException, ServletException {
+                         FilterChain filterChain) {
         logRequestTime(servletRequest, servletResponse, filterChain);
     }
 
@@ -43,21 +45,19 @@ public class QaFilter implements Filter {
      * @throws ServletException Servlet异常
      */
     private void logRequestTime(ServletRequest servletRequest, ServletResponse servletResponse,
-                                FilterChain filterChain) throws IOException, ServletException {
+                                FilterChain filterChain) throws IOException, ServletException, AskException {
         long startTime = System.currentTimeMillis();
 
         // 鉴权
         HttpServletRequest request = RequestUtils.getRequest();
         String cookie = request.getHeader("Cookie");
-//        if (!StringUtils.isEmpty(cookie)) {
+        if (StringUtils.isNotEmpty(cookie) || "/auth/login".equals(request.getRequestURI())) {
             filterChain.doFilter(servletRequest, servletResponse);
-//        } else {
-//            HttpServletResponse response = RequestUtils.getResponse();
-//            response.setStatus(302);
-//            response.sendRedirect("/login");
-//        }
-        long endTime = System.currentTimeMillis();
-        String requestURI = request.getRequestURI();
-        log.info("请求 {} 耗时 {} 秒", requestURI, (endTime - startTime) / 1000.0);
+            long endTime = System.currentTimeMillis();
+            String requestURI = request.getRequestURI();
+            log.info("请求 {} 耗时 {} 秒", requestURI, (endTime - startTime) / 1000.0);
+        } else {
+            throw new AskException("登录信息已过期，请重新登录");
+        }
     }
 }

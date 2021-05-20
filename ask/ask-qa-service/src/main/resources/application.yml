@@ -26,3 +26,16 @@ spring:
           slow-sql-millis: 2000
           merge-sql: true
           connection-stack-trace-enable: true
+  #redis
+  redis:
+    database: 0
+    host: 192.227.150.122
+    port: 6379
+    password: 12345678
+    timeout: 2500
+    jedis:
+      pool:
+        max-active: 20
+        max-wait: -1
+        max-idle: 10
+        min-idle: 2
