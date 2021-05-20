@@ -18,6 +18,26 @@ Vue.prototype.isEmpty = isEmpty
 Vue.prototype.isNotEmpty = isNotEmpty
 Vue.prototype.getCookie = getCookie
 
+router.beforeEach((to, from, next) => {
+  // 判断该路由是否需要登录权限
+  if (to.matched.some(record => record.meta.requireAuth)) {
+    // 判断当前的userId是否存在，登录存入的userId
+    if (getCookie('userId')) { 
+      next()
+    }
+    else {
+      next({
+        path: '/login',
+        // 将要跳转路由的path作为参数，传递到登录页面
+        query: {redirect: to.fullPath}
+      })
+    }
+  }
+  else {
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

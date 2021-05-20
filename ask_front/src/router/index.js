@@ -20,18 +20,30 @@ export default new Router({
         {
             path: '/',
             name: '/',
+            meta: {
+                requireAuth: true
+            },
             component: Index
         }, {
             path: '/ask',
             name: 'ask',
+            meta: {
+                requireAuth: true
+            },
             component: Ask
         }, {
             path: '/allQuestions',
             name: 'allQuestions',
+            meta: {
+                requireAuth: true
+            },
             component: AllQuestions
         }, {
             path: '/tags',
             name: 'tags',
+            meta: {
+                requireAuth: true
+            },
             component: Tags
         }, {
             path: '/login',
@@ -40,6 +52,9 @@ export default new Router({
         }, {
             path: '/users',
             name: 'users',
+            meta: {
+                requireAuth: true
+            },
             component: User
         }
     ]

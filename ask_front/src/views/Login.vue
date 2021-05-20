@@ -31,7 +31,15 @@ export default {
             loginBtnDisabled: false
         }
     },
+    created() {
+        this.showLoginMessage()
+    },
     methods: {
+        showLoginMessage() {
+            if (this.$route.query) {
+                this.openMessageWarning('登录信息已过期，请重新登录')
+            }
+        },
         login() {
             if (this.isEmpty(this.form.userId) || this.isEmpty(this.form.password)) {
                 this.openMessageWarning('用户名和密码不能为空')
