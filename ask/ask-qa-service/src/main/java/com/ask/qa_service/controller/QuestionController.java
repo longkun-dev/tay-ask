@@ -13,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author zhulongkun20@163.com
@@ -54,5 +55,28 @@ public class QuestionController {
     @DeleteMapping("/question/{questionNo}")
     public ResponseEntity<Integer> deleteQuestion(@PathVariable("questionNo") String questionNo) {
         return ResponseUtils.success(questionService.deleteQuestion(questionNo));
+    }
+
+    @PermissionCheck(roles = RoleEnum.R_USER)
+    @ApiOperation(value = "获取首页随机展示的问题", notes = "获取首页随机展示的问题")
+    @GetMapping("/question/list/random")
+    public ResponseEntity<List<AskQuestionPo>> listRandomQuestions(@ApiParam(name = "questionCount")
+                                                                           int questionCount) {
+        return ResponseUtils.success(questionService.listRandomQuestions(questionCount));
+    }
+
+    @PermissionCheck(roles = RoleEnum.R_USER)
+    @ApiOperation(value = "获取最新的问题列表", notes = "获取最新的问题列表")
+    @GetMapping("/question/list/top")
+    public ResponseEntity<List<AskQuestionPo>> listTopQuestions(@ApiParam(name = "questionCount")
+                                                                        int questionCount) {
+        return ResponseUtils.success(questionService.listTopQuestions(questionCount));
+    }
+
+    @PermissionCheck(roles = RoleEnum.R_USER)
+    @ApiOperation(value = "获取问题总数", notes = "获取问题总数")
+    @GetMapping("/question/count")
+    public ResponseEntity<Integer> getQuestionCount() {
+        return ResponseUtils.success(questionService.getQuestionCount());
     }
 }

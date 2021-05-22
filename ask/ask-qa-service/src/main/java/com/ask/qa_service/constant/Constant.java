@@ -14,6 +14,12 @@ public class Constant {
 
 
     /**
+     * 基础码表中问题标签
+     */
+    public static final String QUESTION_TAG = "QUESTION_TAG";
+
+
+    /**
      * 问题编号前缀
      */
     public static final String QUESTION_ID_PREFIX = "Q";
@@ -41,4 +47,16 @@ public class Constant {
      * 日期格式 yyyyMMdd
      */
     public static final String DATE_FORMAT_yyyyMMdd = "yyyyMMdd";
+
+
+    /**
+     * 首页随机问题展示个数
+     */
+    public static final int RANDOM_QUESTION_COUNT = 30;
+
+
+    /**
+     * 最新问题展示个数
+     */
+    public static final int TOP_QUESTION_COUNT = 20;
 }

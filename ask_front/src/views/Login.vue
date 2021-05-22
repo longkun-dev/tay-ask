@@ -49,7 +49,7 @@ export default {
             let param = this.form
             this.axios.post('auth/login', param).then((res) => {
                 if (res.data.code === 200) {
-                    this.openMessageSuccess(res.data.message)
+                    this.openMessageSuccess('登录成功')
                     this.$router.push({path: '/', query: {}})
                 } else {
                     this.openMessageError(res.data.message)

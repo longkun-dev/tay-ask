@@ -52,6 +52,32 @@
         where question.question_no = #{questionNo}
     </select>
 
+    <select id="selectByCount" resultMap="BaseResultMap" parameterType="integer">
+        select
+        <include refid="Base_Column_List_t"/>,
+        content.question_content
+        from ask_question question
+        left join ask_question_content content
+        on question.question_no = content.question_no
+        limit #{count}
+    </select>
+
+    <select id="selectQuestionByCreateTime" resultMap="BaseResultMap" parameterType="integer">
+        select
+        <include refid="Base_Column_List_t"/>,
+        content.question_content
+        from ask_question question
+        left join ask_question_content content
+        on question.question_no = content.question_no
+        order by question.created_time desc
+        limit #{count}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*)
+        from ask_question
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete
         from ask_question
@@ -59,22 +85,23 @@
     </delete>
 
     <delete id="deleteByQuestionNo" parameterType="string">
-        delete from ask_question
+        delete
+        from ask_question
         where question_no = #{questionNo}
     </delete>
 
     <insert id="insert" parameterType="com.ask.qa_service.entity.po.AskQuestionPo">
         insert into ask_question (id,
-                                          question_no,
-                                          question_title,
-                                          publish_time,
-                                          votes,
-                                          answers,
-                                          views,
-                                          tags,
-                                          asked_by,
-                                          created_by,
-                                          updated_by)
+                                  question_no,
+                                  question_title,
+                                  publish_time,
+                                  votes,
+                                  answers,
+                                  views,
+                                  tags,
+                                  asked_by,
+                                  created_by,
+                                  updated_by)
         values (#{id,jdbcType=VARCHAR},
                 #{questionNo,jdbcType=VARCHAR},
                 #{questionTitle,jdbcType=VARCHAR},

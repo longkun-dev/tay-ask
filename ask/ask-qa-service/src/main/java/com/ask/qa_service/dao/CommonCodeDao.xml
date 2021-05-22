@@ -46,15 +46,37 @@
         ON DUPLICATE KEY UPDATE id = #{id}
     </insert>
 
+    <insert id="insertBatch" parameterType="com.ask.qa_service.entity.po.CommonCodePo">
+        insert into common_code (id,
+        code_name,
+        code_value,
+        remark,
+        created_by,
+        created_time,
+        updated_by,
+        updated_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},
+            #{item.codeName},
+            #{item.codeValue},
+            #{item.remark},
+            #{item.createdBy},
+            now(),
+            #{item.updatedBy},
+            now())
+        </foreach>
+    </insert>
+
     <update id="updateCodeValueByCodeName" parameterType="com.ask.qa_service.entity.po.CommonCodePo">
         update common_code
         set code_value = #{codeValue},
-            remark = #{remark},
+            remark     = #{remark},
             updated_by = #{updatedBy}
         where code_name = #{codeName}
     </update>
 
-    <select id="selectByCodeName" resultMap="BaseResultMap">
+    <select id="selectByCodeName" resultMap="BaseResultMap" parameterType="java.lang.String">
         select id,
                code_name,
                code_value,

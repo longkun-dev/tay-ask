@@ -126,11 +126,14 @@ export default {
                 'tags': this.form.tags.join(';')
             }
             this.axios.post('/question', param).then((res) => {
-                if (res.code = 200) {
+                if (res.status = 200) {
                     this.openMessageSuccess('问题发布成功')
                 } else {
                     this.openMessageError('问题发布失败，请重试')
                 }
+                this.editFlag = false
+            }).catch((err) => {
+                this.openMessageError('问题发布失败，请重试')
                 this.editFlag = false
             })
         },
@@ -142,6 +145,11 @@ export default {
             
             if (this.isEmpty(this.form.questionContent)) {
                 this.openMessageWarning('问题内容不能为空')
+                return false
+            }
+
+            if (this.isEmpty(this.form.tags) || this.form.tags.length <= 0) {
+                this.openMessageWarning('问题标签不能为空')
                 return false
             }
 

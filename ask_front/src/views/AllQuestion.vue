@@ -12,8 +12,9 @@
                         <h2>All Questions</h2>
                         <el-button type="primary" @click="askQuestion">Ask Question</el-button>
                     </div>
-                    <div class="question-number">21,191,897 questions</div>
-                    <question-item style="padding-left: 0px" v-for="question in questions"
+                    <div class="question-number">{{ count }} questions</div>
+                    <div v-if="questionList.length > 0">
+                        <question-item style="padding-left: 0px" v-for="question in questionList"
                         :key="question.questionNo"
                         :votes="question.votes" :answers="question.answers"
                         :views="question.views" :question-no="question.questionNo"
@@ -22,6 +23,10 @@
                         :publish-time="question.publishTime"
                         :tags="question.tags" :asked-by="question.askedBy"
                         :created-by="question.createdBy"></question-item>
+                    </div>
+                    <div v-else style="margin-top: 20px">
+                        <span>没有相关数据</span>
+                    </div>
                 </div>
             </el-col>
         </el-row>
@@ -36,51 +41,9 @@ import Header from '../components/Header.vue'
 export default {
     data() {
         return {
-            questions: [{
-                questionNo: '1001',
-                publishTime: '2021-05-06 21:22',
-                votes: 1,
-                answers: 2,
-                views: 3,
-                questionTitle: 'How can I learn python fastly?',
-                questionContent: 'I need to know the best way to perform user personalisation on react js whilst reducing the number of requests running through the dB because I‘m using a dB which changes per request. Thanks.',
-                tags: ["python", "pandas", "matplotlib", "seaborn"],
-                askedBy: 'Zenkage',
-                createdBy: 'Zenkage'
-            }, {
-                questionNo: '1002',
-                publishTime: '2021-05-06 21:22',
-                votes: 1,
-                answers: 2,
-                views: 3,
-                questionTitle: 'How can I learn python fastly?',
-                questionContent: 'Test Content',
-                tags: ["python", "pandas", "matplotlib", "seaborn"],
-                askedBy: 'Zenkage',
-                createdBy: 'Zenkage'
-            }, {
-                questionNo: '1003',
-                publishTime: '2021-05-06 21:22',
-                votes: 1,
-                answers: 2,
-                views: 3,
-                questionTitle: 'How can I learn python fastly?',
-                questionContent: 'Test Content',
-                tags: ["python", "pandas", "matplotlib", "seaborn"],
-                askedBy: 'Zenkage',
-                createdBy: 'Zenkage'
-            }, {
-                questionNo: '1004',
-                publishTime: '2021-05-06 21:22',
-                votes: 1,
-                answers: 2,
-                views: 3,
-                questionTitle: 'How can I learn python fastly?',
-                questionContent: 'Test Content',
-                tags: ["python", "pandas", "matplotlib", "seaborn"],
-                askedBy: 'Zenkage',
-                createdBy: 'Zenkage'
-            }]
+            questionList: [],
+            count: 0,
+            questionCount: 20
         }
     },
     components: {
@@ -88,7 +51,44 @@ export default {
         'question-item': QuestionItem,
         'header1': Header
     },
+    created() {
+        this.queryData(this.questionCount)
+        this.queryQuestionCount()
+    },
     methods: {
+        queryData(count) {
+            if (Number.isNaN(count)) {
+                count = this.questionCount
+            }
+            let params = {
+                'questionCount': count
+            }
+            this.axios.get('question/list/top', { params }).then((res) => {
+                if (res.status === 200) {
+                    let list = res.data.data
+                    list.forEach(element => {
+                        let tagStr = element.tags
+                        if (this.isNotEmpty(tagStr)) {
+                            element.tags = tagStr.split(';')
+                        } else {
+                            element.tags = []
+                        }
+                    })
+                    this.questionList = list
+                } else {
+                    this.openMessageError('请求错误')
+                }
+            })
+        },
+        queryQuestionCount() {
+            this.axios('question/count').then((res) => {
+                if (res.status === 200) {
+                    this.count = res.data.data
+                } else {
+                    this.openMessageError('请求错误')
+                }
+            })
+        },
         askQuestion() {
             this.$router.push({path: '/ask', query: {}})
         },
